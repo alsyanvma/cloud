@@ -58,7 +58,11 @@ h5{
     text-align: center;
     margin-top: 50px;
 }
-
+@media (max-width: 768px) {
+  .card {
+    padding: 20px; 
+    }
+}
 
 
 

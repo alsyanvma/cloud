@@ -81,4 +81,9 @@ i {
     color: black;
     font-size: 2em;
 }
+@media (max-width: 768px) {
+  .card {
+    padding: 20px; 
+    }
+}
 </style>

@@ -111,5 +111,9 @@ h6 {
     text-align: center;
     margin: 70px;
 }
-
+@media (max-width: 768px) {
+  .card {
+    padding: 20px; 
+    }
+}
 </style>

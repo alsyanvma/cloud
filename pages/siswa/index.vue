@@ -116,4 +116,9 @@ i {
   text-align: center;
   vertical-align: middle;
 }
+@media (max-width: 768px) {
+  .card {
+    padding: 20px; 
+    }
+}
 </style>

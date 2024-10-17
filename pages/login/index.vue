@@ -88,5 +88,9 @@ const Login = async () => {
 .btn:hover {
   background-color: #45a05e; 
 }
-
+@media (max-width: 768px) {
+  .card {
+    padding: 20px; 
+    }
+}
 </style>
