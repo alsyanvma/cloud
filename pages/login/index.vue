@@ -39,8 +39,8 @@ const Login = async () => {
 
 <template>
   <div class="container-fluid mb-5">
-    <div class="container-fluid mb-5 d-flex justify-content-center align-items-center" style="height: 70vh;">      
-      <div class="col-md-4">
+    <div class="container-fluid mb-5 d-flex justify-content-center align-items-center" style="height: 100vh;">      
+      <div class="col-md-4 mt-5">
         <div class="card shadow-lg p-4" style="border-radius: 15px;">
           <h2 class="text-center">Selamat Datang!</h2>
           <form @submit.prevent="Login">
@@ -82,15 +82,9 @@ const Login = async () => {
 <style scoped>
 .card {
   background-color: white;
-
 }
 
 .btn:hover {
   background-color: #45a05e; 
-}
-@media (max-width: 768px) {
-  .card {
-    padding: 20px; 
-    }
 }
 </style>

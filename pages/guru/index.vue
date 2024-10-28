@@ -12,6 +12,7 @@
                       <input v-model="keyword" type="search" class="form-control rounded-5" placeholder="Cari">
                   </form>
                   <div class="my-3 text-muted"> menampilkan {{ visitors.length }} dari {{ jumlah }} siswa</div>
+                  <div class="table-responsive">
                   <table class="table table-bordered">
                       <thead>
                           <tr>
@@ -35,6 +36,7 @@
           </div>
       </div>
   </div>
+</div>
 </template>
 <script setup>
 const supabase = useSupabaseClient()
@@ -72,9 +74,16 @@ i{
   color: black;
   font-size: 2em;
 }
+.table-responsive {
+  overflow-x: auto; 
+}
+
 @media (max-width: 768px) {
-  .card {
-    padding: 20px; 
-    }
+  h2 {
+    font-size: 1.5em; 
+  }
+  .form-control {
+    font-size: 0.9em; 
+  }
 }
 </style>

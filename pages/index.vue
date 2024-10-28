@@ -3,7 +3,7 @@
         <div class="row my-5">
             <div class="col-lg-6">
                 <nuxt-link to="/login">
-                    <div class="card bg-success rounded-5">
+                    <div class="card bg-success rounded-5 admin-card">
                         <div class="card-body">
                             <h5>Admin</h5>
                         </div>
@@ -12,8 +12,8 @@
             </div>
             <div class="col-lg-6">
                 <nuxt-link to="/halaman2">
-                    <div class="card bg-success rounded-5">
-                        <div clas="card-body">
+                    <div class="card bg-success rounded-5 umum-card">
+                        <div class="card-body">
                             <h1>Umum</h1>
                         </div>
                     </div>
@@ -23,47 +23,34 @@
     </div>
 </template>
 
-
-
-
-
-
-
 <style scoped>
-
-
 .card {
-    height: 200px;
-    margin-right: 27px;
-    margin-left: 50px ;
-    box-shadow: 1px 1px 20px #291f1f;
-    margin-top: 200px;
-    
+    height: 180px;
+    box-shadow: 0 10px 30px rgba(41, 31, 31, 0.2); 
+    margin-top: 20px; 
+    transition: box-shadow 0.3s ease; 
 }
 
-h1 {
+.card:hover {
+    box-shadow: 0 12px 40px rgba(41, 31, 31, 0.3); 
+}
+
+h1, h5 {
     color: rgb(255, 255, 255);
     font-size: 30px;
     text-align: center;
-    margin-top: 65px;
-
+    margin-top: 30px; 
 }
 
-
-
-h5{
-    color: rgb(255, 255, 255);
-    justify-content: center;
-    font-size: 30px;
-    text-align: center;
-    margin-top: 50px;
-}
 @media (max-width: 768px) {
-  .card {
-    padding: 20px; 
+    .card {
+        height: auto; 
+        margin-top: 10px; 
+    }
+
+    h1, h5 {
+        font-size: 24px;
+        margin-top: 15px; 
     }
 }
-
-
-
 </style>
