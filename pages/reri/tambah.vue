@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h2 class="text-center my-4">RIWAYAT</h2>
-                <nuxt-link to="/halaman1">
+                <nuxt-link to="/halaman2">
                     <i class="bi bi-arrow-left"></i>
                 </nuxt-link>
                 <div class="my-3">
@@ -58,10 +58,9 @@ const getsiswa = async () => {
         getjumlah() 
     }
 }
-
 const getjumlah = async () => {
-    const { data, count } = await supabase.from('riwayat').select("*", { count: 'exact' });
-    if (data) jumlah.value = count
+    const { count } = await supabase.from('siswa').select("*", { count: 'exact' });
+    if (count) jumlah.value = count
 }
 
 const filteredVisitors = computed(() => {
@@ -81,5 +80,4 @@ i {
     color: black;
     font-size: 2em;
 }
-
 </style>

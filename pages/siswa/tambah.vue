@@ -58,10 +58,9 @@ const getsiswa = async () => {
         getjumlah() 
     }
 }
-
 const getjumlah = async () => {
-    const { data, count } = await supabase.from('riwayat').select("*", { count: 'exact' });
-    if (data) jumlah.value = count
+    const { count } = await supabase.from('siswa').select("*", { count: 'exact' });
+    if (count) jumlah.value = count
 }
 
 const filteredVisitors = computed(() => {
@@ -81,5 +80,4 @@ i {
     color: black;
     font-size: 2em;
 }
-
 </style>
