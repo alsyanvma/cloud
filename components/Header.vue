@@ -23,7 +23,7 @@
 
 <style scoped>
 .bg-plum {
-  background-color: #58A86A  ; 
+  background-color: #58A86A  ;  
 }
 
 .text-white {
@@ -32,10 +32,12 @@
 
 .header-title {
   font-size: 24px;
+  font-weight: bold;  
 }
 
 .header-address {
   font-size: 16px;
+  font-weight: bold; 
 }
 
 @media (max-width: 576px) {
