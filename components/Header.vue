@@ -1,5 +1,5 @@
 <template>
-  <div class="row align-items-center p-3 bg-plum text-white">
+  <div class="row align-items-center p-3 bg-dark-green text-light"> 
     <div class="col-3 col-md-2 col-lg-1 text-center">
       <picture>
         <img 
@@ -21,23 +21,31 @@
   </div>
 </template>
 
+<script setup>
+useHead({ title: "menu_admin", meta: [{ name: "menu_admin", content: "HALAMAN MENU ADMIN" }] });
+</script>
+
 <style scoped>
-.bg-plum {
-  background-color: #58A86A  ;  
+.bg-dark-green {
+  background-color: #026424;  
 }
 
-.text-white {
+.text-light {
   color: #FFFFFF; 
 }
 
 .header-title {
-  font-size: 24px;
+  font-size: 2.5rem; 
   font-weight: bold;  
+  letter-spacing: 1px; 
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
 }
 
 .header-address {
-  font-size: 16px;
-  font-weight: bold; 
+  font-size: 1.25rem; 
+  font-weight: normal; 
+  letter-spacing: 0.5px; 
+  margin-top: 10px; 
 }
 
 @media (max-width: 576px) {
@@ -46,21 +54,14 @@
   }
 }
 
-@media (min-width: 768px) {
-  .header-title {
-    font-size: 32px;
-  }
-  .header-address {
-    font-size: 20px;
-  }
-}
+
 
 @media (min-width: 992px) {
   .header-title {
-    font-size: 40px;
+    font-size: 2,5rem; 
   }
   .header-address {
-    font-size: 24px;
+    font-size: 1,5rem; 
   }
 }
 </style>
