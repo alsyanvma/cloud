@@ -5,7 +5,7 @@
                 <nuxt-link to="/login">
                     <div class="card bg-success rounded-5 admin-card">
                         <div class="card-body">
-                            <h5>Admin</h5>
+                            <h2>Admin</h2> 
                         </div>
                     </div>
                 </nuxt-link>
@@ -35,7 +35,7 @@
     box-shadow: 0 12px 40px rgba(41, 31, 31, 0.3); 
 }
 
-h1, h5 {
+h1, h2 { 
     color: rgb(255, 255, 255);
     font-size: 30px;
     text-align: center;
@@ -48,9 +48,11 @@ h1, h5 {
         margin-top: 10px; 
     }
 
-    h1, h5 {
+    h1, h2 { /* Mengganti h5 dengan h2 */
         font-size: 24px;
         margin-top: 15px; 
     }
 }
+
+
 </style>
