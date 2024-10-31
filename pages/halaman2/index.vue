@@ -46,6 +46,7 @@
   h1, h5 {
     color: rgb(255, 255, 255);
     text-align: center;
+    margin-top: 50px;
   }
   
   h1 {
