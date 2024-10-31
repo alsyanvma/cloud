@@ -27,7 +27,7 @@ useHead({ title: "menu_admin", meta: [{ name: "menu_admin", content: "HALAMAN ME
 
 <style scoped>
 .bg-dark-green {
-  background-color: #026424;  
+  background-color: #63A66C;  
 }
 
 .text-light {
