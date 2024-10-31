@@ -39,7 +39,7 @@ h1, h5 {
     color: rgb(255, 255, 255);
     font-size: 30px;
     text-align: center;
-    margin-top: 30px; 
+    margin-top: 50px; 
 }
 
 @media (max-width: 768px) {
