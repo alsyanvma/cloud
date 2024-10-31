@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h2 class="text-center my-4">RIWAYAT</h2>
-                <nuxt-link to="/halaman2">
+                <nuxt-link to="/halaman1">
                     <i class="bi bi-arrow-left"></i>
                 </nuxt-link>
                 <div class="my-3">

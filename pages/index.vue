@@ -1,5 +1,6 @@
 <template>
     <div class="container-fluid">
+        
         <div class="row my-5">
             <div class="col-lg-6">
                 <nuxt-link to="/login">
@@ -28,7 +29,6 @@
     height: 180px;
     box-shadow: 0 10px 30px rgba(41, 31, 31, 0.2); 
     margin-top: 20px; 
-    transition: box-shadow 0.3s ease; 
 }
 
 .card:hover {
@@ -48,7 +48,7 @@ h1, h2 {
         margin-top: 10px; 
     }
 
-    h1, h2 { /* Mengganti h5 dengan h2 */
+    h1, h2 {
         font-size: 24px;
         margin-top: 15px; 
     }

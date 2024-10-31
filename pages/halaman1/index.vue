@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-lg-12">
         <nuxt-link to="/">
-          <i class="bi bi-arrow-left"></i>
+          <i class="bi bi-power"></i>
         </nuxt-link>
         <div class="row my-5">
           <div class="col-lg-6 col-md-6 col-12 mb-3">
