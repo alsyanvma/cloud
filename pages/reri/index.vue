@@ -11,29 +11,32 @@
           <input type="date" v-model="searchDate" class="form-control w-50" />
         </div>
         <div class="my-3">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">WAKTU</th>
-                <th scope="col">JUMLAH IZIN</th>
-                <th scope="col">JUMLAH SAKIT</th>
-                <th scope="col">JUMLAH ALPA</th>
-                <th scope="col">JUMLAH DISPEN</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(rekap, index) in filteredRekapData" :key="index">
-                <td>{{ formatTanggal(rekap.waktu) }}</td>
-                <td>{{ rekap.jumlahIzin.toLocaleString("id-ID") }}</td>
-                <td>{{ rekap.jumlahSakit.toLocaleString("id-ID") }}</td>
-                <td>{{ rekap.jumlahAlfa.toLocaleString("id-ID") }}</td>
-                <td>{{ rekap.jumlahDispen.toLocaleString("id-ID") }}</td>
-              </tr>
-              <tr v-if="filteredRekapData.length === 0">
-                <td colspan="5" class="text-center">Tidak ada data tersedia</td>
-              </tr>
-            </tbody>
-          </table>
+          <!-- Tambahkan table-responsive pada wrapper tabel -->
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">WAKTU</th>
+                  <th scope="col">JUMLAH IZIN</th>
+                  <th scope="col">JUMLAH SAKIT</th>
+                  <th scope="col">JUMLAH ALPA</th>
+                  <th scope="col">JUMLAH DISPEN</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(rekap, index) in filteredRekapData" :key="index">
+                  <td>{{ formatTanggal(rekap.waktu) }}</td>
+                  <td>{{ rekap.jumlahIzin.toLocaleString("id-ID") }}</td>
+                  <td>{{ rekap.jumlahSakit.toLocaleString("id-ID") }}</td>
+                  <td>{{ rekap.jumlahAlfa.toLocaleString("id-ID") }}</td>
+                  <td>{{ rekap.jumlahDispen.toLocaleString("id-ID") }}</td>
+                </tr>
+                <tr v-if="filteredRekapData.length === 0">
+                  <td colspan="5" class="text-center">Tidak ada data tersedia</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -46,12 +49,13 @@ const supabase = useSupabaseClient();
 const rekapData = ref([]);
 const searchDate = ref("");
 
+// Format tanggal untuk tampilan
 const formatTanggal = (tanggal) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
   return new Date(tanggal).toLocaleDateString("id-ID", options);
 };
 
-
+// Ambil data rekap dari Supabase
 const fetchRekapData = async () => {
   try {
     const { data: siswaData, error } = await supabase
@@ -60,7 +64,7 @@ const fetchRekapData = async () => {
 
     if (error) throw error;
 
-    console.log("Fetched Data:", siswaData); 
+    console.log("Fetched Data:", siswaData);
 
     const rekap = {};
     siswaData.forEach((visitor) => {
@@ -70,9 +74,8 @@ const fetchRekapData = async () => {
         rekap[key] = { waktu: key, jumlahIzin: 0, jumlahSakit: 0, jumlahAlfa: 0, jumlahDispen: 0 };
       }
 
-     
       const keterangan = (visitor.keterangan?.keterangan || '').trim().toLowerCase();
-      console.log(`Processing Keterangan: ${keterangan} on ${key}`); 
+      console.log(`Processing Keterangan: ${keterangan} on ${key}`);
 
       switch (keterangan) {
         case 'izin':
@@ -88,28 +91,29 @@ const fetchRekapData = async () => {
           rekap[key].jumlahDispen++;
           break;
         default:
-          console.log(`Unrecognized keterangan: ${keterangan}`); 
+          console.log(`Unrecognized keterangan: ${keterangan}`);
       }
     });
 
-    console.log("Processed Rekap Data:", rekap); 
+    console.log("Processed Rekap Data:", rekap);
     rekapData.value = Object.values(rekap).sort((a, b) => new Date(b.waktu) - new Date(a.waktu));
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 };
 
-
+// Filter data berdasarkan tanggal
 const filteredRekapData = computed(() => {
   if (!searchDate.value) {
     return rekapData.value;
   }
-  
+
   return rekapData.value.filter((rekap) => {
-    const formattedDate = new Date(rekap.waktu).toISOString().split("T")[0]; 
-    return formattedDate === searchDate.value; 
+    const formattedDate = new Date(rekap.waktu).toISOString().split("T")[0];
+    return formattedDate === searchDate.value;
   });
 });
+
 onMounted(() => {
   fetchRekapData();
 });
@@ -123,10 +127,26 @@ i {
 
 .table {
   margin-top: 20px;
+  table-layout: fixed; /* Agar kolom tabel tidak meluber */
+  width: 100%; /* Pastikan tabel memenuhi lebar kontainer */
 }
 
 .table th, .table td {
   text-align: center;
   vertical-align: middle;
+  padding: 10px; /* Padding sel untuk kenyamanan membaca */
+  word-wrap: break-word; /* Memastikan teks panjang tetap wrap di dalam kolom */
+}
+
+.table-responsive {
+  max-width: 100%; /* Agar tabel tidak melebihi lebar kontainer */
+  overflow-x: auto; /* Tambahkan scroll horizontal pada perangkat kecil */
+}
+
+@media (max-width: 576px) {
+  .table th, .table td {
+    font-size: 0.875rem; /* Ukuran font lebih kecil pada perangkat mobile */
+    padding: 8px; /* Padding lebih kecil untuk tampilan mobile */
+  }
 }
 </style>
