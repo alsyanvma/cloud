@@ -21,6 +21,7 @@
                               <td scope="col">NAMA</td>
                               <td scope="col">KELAS</td>
                               
+                              
                           </tr>
                       </thead>
                       <tbody>

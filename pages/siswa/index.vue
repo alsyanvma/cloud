@@ -18,6 +18,7 @@
                 <th scope="col">JUMLAH IZIN</th>
                 <th scope="col">JUMLAH SAKIT</th>
                 <th scope="col">JUMLAH ALPA</th>
+                <th scope="col">JUMLAH DISPEN</th>
               </tr>
             </thead>
             <tbody>
@@ -26,9 +27,10 @@
                 <td>{{ rekap.jumlahIzin.toLocaleString("id-ID") }}</td>
                 <td>{{ rekap.jumlahSakit.toLocaleString("id-ID") }}</td>
                 <td>{{ rekap.jumlahAlfa.toLocaleString("id-ID") }}</td>
+                <td>{{ rekap.jumlahDispen.toLocaleString("id-ID") }}</td>
               </tr>
               <tr v-if="filteredRekapData.length === 0">
-                <td colspan="4" class="text-center">Tidak ada data tersedia</td>
+                <td colspan="5" class="text-center">Tidak ada data tersedia</td>
               </tr>
             </tbody>
           </table>
@@ -39,10 +41,10 @@
 </template>
 
 <script setup>
+import { ref, computed, onMounted } from "vue";
 const supabase = useSupabaseClient();
 const rekapData = ref([]);
-const searchDate = ref(""); 
-
+const searchDate = ref("");
 
 const formatTanggal = (tanggal) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -58,39 +60,49 @@ const fetchRekapData = async () => {
 
     if (error) throw error;
 
-    console.log("Data Presensi:", siswaData);
+    console.log("Fetched Data:", siswaData); 
+
     const rekap = {};
     siswaData.forEach((visitor) => {
       const key = visitor.created_at;
 
       if (!rekap[key]) {
-        rekap[key] = { waktu: key, jumlahIzin: 0, jumlahSakit: 0, jumlahAlfa: 0 };
+        rekap[key] = { waktu: key, jumlahIzin: 0, jumlahSakit: 0, jumlahAlfa: 0, jumlahDispen: 0 };
       }
 
-      const keterangan = (visitor.keterangan?.keterangan || 'Tidak Diketahui').trim();
-      console.log(`Keterangan pada ${key}:`, keterangan);
+     
+      const keterangan = (visitor.keterangan?.keterangan || '').trim().toLowerCase();
+      console.log(`Processing Keterangan: ${keterangan} on ${key}`); 
+
       switch (keterangan) {
-        case 'Izin':
+        case 'izin':
           rekap[key].jumlahIzin++;
           break;
-        case 'Sakit':
+        case 'sakit':
           rekap[key].jumlahSakit++;
           break;
-        case 'Alpa':
+        case 'alpa':
           rekap[key].jumlahAlfa++;
           break;
+        case 'dispen':
+          rekap[key].jumlahDispen++;
+          break;
+        default:
+          console.log(`Unrecognized keterangan: ${keterangan}`); 
       }
     });
 
+    console.log("Processed Rekap Data:", rekap); 
     rekapData.value = Object.values(rekap).sort((a, b) => new Date(b.waktu) - new Date(a.waktu));
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 };
 
+
 const filteredRekapData = computed(() => {
   if (!searchDate.value) {
-    return rekapData.value; 
+    return rekapData.value;
   }
   
   return rekapData.value.filter((rekap) => {
@@ -98,7 +110,6 @@ const filteredRekapData = computed(() => {
     return formattedDate === searchDate.value; 
   });
 });
-
 onMounted(() => {
   fetchRekapData();
 });
@@ -109,12 +120,13 @@ i {
   color: black;
   font-size: 2em;
 }
+
 .table {
   margin-top: 20px;
 }
+
 .table th, .table td {
   text-align: center;
   vertical-align: middle;
 }
-
 </style>
