@@ -51,32 +51,30 @@
 </template>
 <script setup>
 import { ref, computed, onMounted } from "vue";
-const supabase = useSupabaseClient();  // Menggunakan Supabase Client
-const keyword = ref('');               // Ref untuk input pencarian
-const visitors = ref([]);              // Ref untuk data riwayat
-const jumlah = ref(0);                 // Ref untuk jumlah total siswa
-
-// Fungsi untuk mengambil data riwayat
+const supabase = useSupabaseClient();  
+const keyword = ref('');               
+const visitors = ref([]);            
+const jumlah = ref(0);               
 const getsiswa = async () => {
   try {
     const { data, error } = await supabase.from('riwayat')
-      .select('*, nama(*), keterangan(*)')  // Mengambil data yang relevan
-      .order('id', { ascending: false });  // Mengurutkan berdasarkan ID terbaru
+      .select('*, nama(*), keterangan(*)')  
+      .order('id', { ascending: false }); 
 
     if (error) {
       console.error('Error fetching riwayat data:', error);
       return;
     }
     if (data) {
-      visitors.value = data;  // Menyimpan data riwayat ke dalam visitors
-      getjumlah();             // Memperbarui jumlah siswa
+      visitors.value = data;  
+      getjumlah();             
     }
   } catch (error) {
     console.error('Error fetching riwayat data:', error);
   }
 };
 
-// Fungsi untuk mengambil jumlah siswa
+
 const getjumlah = async () => {
   try {
     const { count, error } = await supabase.from('siswa').select('*', { count: 'exact' });
@@ -90,7 +88,7 @@ const getjumlah = async () => {
   }
 };
 
-// Filter berdasarkan keyword pencarian
+
 const filteredVisitors = computed(() => {
   if (!keyword.value) return visitors.value;
   return visitors.value.filter(visitor =>
@@ -98,8 +96,14 @@ const filteredVisitors = computed(() => {
   );
 });
 
-// Memuat data saat komponen pertama kali dimuat
+
 onMounted(() => {
   getsiswa();
 });
 </script>
+<style scoped>
+i {
+  color: black;
+  font-size: 2em;
+}
+</style>

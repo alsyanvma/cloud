@@ -11,7 +11,6 @@
           <input type="date" v-model="searchDate" class="form-control w-50" />
         </div>
         <div class="my-3">
-          <!-- Tambahkan table-responsive pada wrapper tabel -->
           <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
@@ -48,14 +47,12 @@ import { ref, computed, onMounted } from "vue";
 const supabase = useSupabaseClient();
 const rekapData = ref([]);
 const searchDate = ref("");
-
-// Format tanggal untuk tampilan
 const formatTanggal = (tanggal) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
   return new Date(tanggal).toLocaleDateString("id-ID", options);
 };
 
-// Ambil data rekap dari Supabase
+
 const fetchRekapData = async () => {
   try {
     const { data: siswaData, error } = await supabase
@@ -102,7 +99,7 @@ const fetchRekapData = async () => {
   }
 };
 
-// Filter data berdasarkan tanggal
+
 const filteredRekapData = computed(() => {
   if (!searchDate.value) {
     return rekapData.value;
@@ -127,26 +124,26 @@ i {
 
 .table {
   margin-top: 20px;
-  table-layout: fixed; /* Agar kolom tabel tidak meluber */
-  width: 100%; /* Pastikan tabel memenuhi lebar kontainer */
+  table-layout: fixed; 
+  width: 100%;
 }
 
 .table th, .table td {
   text-align: center;
   vertical-align: middle;
-  padding: 10px; /* Padding sel untuk kenyamanan membaca */
-  word-wrap: break-word; /* Memastikan teks panjang tetap wrap di dalam kolom */
+  padding: 10px; 
+  word-wrap: break-word; 
 }
 
 .table-responsive {
-  max-width: 100%; /* Agar tabel tidak melebihi lebar kontainer */
-  overflow-x: auto; /* Tambahkan scroll horizontal pada perangkat kecil */
+  max-width: 100%; 
+  overflow-x: auto; 
 }
 
 @media (max-width: 576px) {
   .table th, .table td {
-    font-size: 0.875rem; /* Ukuran font lebih kecil pada perangkat mobile */
-    padding: 8px; /* Padding lebih kecil untuk tampilan mobile */
+    font-size: 0.875rem; 
+    padding: 8px; 
   }
 }
 </style>
